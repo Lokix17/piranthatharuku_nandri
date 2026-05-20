@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 23rd Birthday Surprise</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fredoka+One&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --blue-main: #bae1ff;
+    --blue-dark: #4a90e2;
+    --pastel-bg: #f0f8ff;
+    --cream-paper: #fbf6f0;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body,html{
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    font-family:'Poppins',sans-serif;
+    background-color: var(--pastel-bg);
+    background-image: radial-gradient(#cce6ff 1px, transparent 1px);
+    background-size: 20px 20px;
+    color:#2f3640;
+}
+
+.screen{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transition:0.8s;
+}
+
+.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.paper-card{
+    background:var(--cream-paper);
+    padding:40px;
+    border-radius:24px;
+    width:90%;
+    max-width:520px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(74,144,226,0.15);
+}
+
+.cute-btn{
+    background:#fff;
+    border:2px solid var(--blue-dark);
+    color:var(--blue-dark);
+    padding:12px 30px;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+    margin-top: 10px;
+}
+
+.cute-btn:hover{
+    background:var(--blue-dark);
+    color:#fff;
+    transform:scale(1.05);
+}
+
+.title-text{
+    font-family:'Dancing Script',cursive;
+    font-size:3.5rem;
+    color:var(--blue-dark);
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.timer-container{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:35px;
+}
+
+.timer-box{
+    background:#fff;
+    padding:15px;
+    border-radius:16px;
+    min-width:85px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(186,225,255,0.5);
+}
+
+.timer-val{
+    font-size:2.5rem;
+    color:var(--blue-dark);
+    font-weight:bold;
+    display:block;
+}
+
+#skip-screen{
+    background:#000;
+    z-index:99;
+}
+
+#skip-number{
+    font-size:8rem;
+    color:var(--blue-dark);
+    font-family:'Fredoka One';
+}
+
+#keypad-screen{
+    background:linear-gradient(135deg,#102030 0%,#050c15 100%);
+}
+
+.premium-layout{
+    display:flex;
+    align-items:center;
+    gap:50px;
+    width:85%;
+    max-width:900px;
+}
+
+.music-sheet-side{
+    flex:1;
+    background:#eedecf;
+    height:450px;
+    border-radius:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.lacy-heart-frame{
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    overflow:hidden;
+    border:4px dashed var(--blue-dark);
+}
+
+.lacy-heart-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.keypad-side{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.passcode-header{
+    color:#fff;
+    font-size:1.6rem;
+    margin-bottom:20px;
+}
+
+.dots-indicator{
+    display:flex;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.dot{
+    width:18px;
+    height:18px;
+    border:2px solid #fff;
+    border-radius:50%;
+}
+
+.dot.active{
+    background:var(--blue-dark);
+}
+
+.grid-keypad{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.key{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.05);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:1.5rem;
+    transition:0.3s;
+}
+
+.key:hover{
+    background:var(--blue-dark);
+    transform:scale(1.08);
+}
+
+.story-gif{
+    width:200px;
+    height:200px;
+    object-fit:contain;
+    margin-bottom:20px;
+}
+
+.story-title{
+    font-size:1.5rem;
+    margin-bottom:30px;
+}
+
+#library-screen{
+    background: var(--pastel-bg);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 50px 20px 150px;
+    justify-content:flex-start;
+}
+
+.library-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    width:95%;
+    max-width:1400px;
+    margin-top:30px;
+}
+
+.envelope-item{
+    background:#fff;
+    padding:35px 20px;
+    border-radius:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 10px 25px rgba(186,225,255,0.2);
+}
+
+.envelope-item:hover{
+    transform:translateY(-8px);
+    border:2px solid var(--blue-dark);
+}
+
+.env-icon{
+    font-size:3.5rem;
+    display:block;
+    margin-bottom:10px;
+}
+
+.env-label{
+    font-size:0.95rem;
+    font-weight:600;
+}
+
+#gift-view-screen{
+    background-size:cover;
+    background-position:center;
+}
+
+.bg-sunflower{
+    background:linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=1200&q=80');
+}
+
+.bg-beach{
+    background:linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80');
+}
+
+.bg-fishes{
+    background:linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80');
+}
+
+.bg-adventurous{
+    background:linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80');
+}
+
+.premium-gift-layout{
+    background:rgba(255,255,255,0.95);
+    border-radius:24px;
+    padding:40px;
+    width:85%;
+    max-width:850px;
+    display:flex;
+    gap:40px;
+}
+
+.memory-photo-container{
+    flex:1;
+    height:340px;
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.memory-photo-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.gift-text-container{
+    flex:1.2;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.gift-main-msg{
+    font-size:1.1rem;
+    line-height:1.7;
+    margin:20px 0;
+}
+
+.navigation-controls{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#balloon-screen{
+    background:var(--pastel-bg);
+}
+
+.balloon-field{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:30px;
+}
+
+.ball{
+    width:95px;
+    height:120px;
+    border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
+    cursor:pointer;
+    animation:floatUp 4s ease-in-out infinite alternate;
+    position:relative;
+}
+
+.ball::after{
+    content:"";
+    position:absolute;
+    bottom:-12px;
+    left:46px;
+    width:2px;
+    height:14px;
+    background:#aaa;
+}
+
+.ball.popped{
+    animation:balloonBlast 0.25s forwards;
+}
+
+@keyframes balloonBlast{
+    0%{transform:scale(1);opacity:1;}
+    50%{transform:scale(1.4);opacity:0.8;}
+    100%{transform:scale(0);opacity:0;}
+}
+
+@keyframes floatUp{
+    0%{ transform:translateY(0px) rotate(-2deg); }
+    100%{ transform:translateY(-22px) rotate(2deg); }
+}
+
+.center-popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    visibility:hidden;
+    transition:0.3s;
+    z-index: 1000;
+}
+
+.center-popup-overlay.reveal{
+    opacity:1;
+    visibility:visible;
+}
+
+/* MODIFIED POPUP TO ELIMINATE TEXT OVERWRITING AND ENABLE INTERNAL SCROLLING */
+.center-msg-card{
+    background:#fff;
+    padding:30px;
+    border-radius:24px;
+    text-align:center;
+    max-width:500px;
+    width:90%;
+    max-height: 85vh; 
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* ADDED FIXED SCROLLING ZONE INSIDE THE ELEMENT BODY */
+.popup-text{
+    font-size:1.1rem;
+    line-height:1.6;
+    margin-bottom:20px;
+    overflow-y: auto; 
+    padding-right: 10px;
+    text-align: left; 
+    flex: 1; 
+}
+
+/* Soft custom scrollbar formatting for cleaner looks */
+.popup-text::-webkit-scrollbar {
+    width: 6px;
+}
+.popup-text::-webkit-scrollbar-thumb {
+    background-color: var(--blue-main);
+    border-radius: 10px;
+}
+
+#fireworks-screen {
+    background: #020208;
+    z-index: 2000;
+}
+
+#fireworks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.fw-overlay-text {
+    position: absolute;
+    bottom: 8%;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255,255,255,0.6), 0 0 30px var(--blue-dark);
+    pointer-events: none;
+    text-align: center;
+    width: 90%;
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.98); opacity: 0.8; }
+    100% { transform: scale(1.02); opacity: 1; }
+}
+
+@media(max-width:768px){
+    .premium-layout,
+    .premium-gift-layout{
+        flex-direction:column;
+        padding:20px;
+    }
+    .music-sheet-side{
+        width:100%;
+        height:240px;
+    }
+    .memory-photo-container{
+        height:220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bg-music" autoplay loop>
+<source src="yellow.mp3" type="audio/mpeg">
+</audio>
+
+<div id="countdown-screen" class="screen">
+    <h1 class="title-text">Waiting For Your Birthday... ⏳</h1>
+    <div class="timer-container">
+        <div class="timer-box"><span class="timer-val" id="d">00</span>days</div>
+        <div class="timer-box"><span class="timer-val" id="h">00</span>hours</div>
+        <div class="timer-box"><span class="timer-val" id="m">00</span>mins</div>
+        <div class="timer-box"><span class="timer-val" id="s">00</span>secs</div>
+    </div>
+    <button class="cute-btn" onclick="triggerSkip9()">Skip Countdown ✨</button>
+</div>
+
+<div id="skip-screen" class="screen hidden">
+    <div style="text-align:center;color:#fff;">
+        <p style="letter-spacing:3px;font-size:1.1rem;margin-bottom:15px;color:var(--blue-main)">WAIT TO SEE THE MAGIC ✨</p>
+        <h1 id="skip-number">9</h1>
+    </div>
+</div>
+
+<div id="keypad-screen" class="screen hidden">
+<div class="premium-layout">
+<div class="music-sheet-side">
+<div class="lacy-heart-frame">
+<img src="photo1.jpg">
+</div>
+</div>
+<div class="keypad-side">
+<h2 class="passcode-header">Enter Password Key:</h2>
+<div class="dots-indicator">
+<div class="dot" id="dot0"></div>
+<div class="dot" id="dot1"></div>
+<div class="dot" id="dot2"></div>
+<div class="dot" id="dot3"></div>
+</div>
+<div class="grid-keypad">
+<div class="key" onclick="pressKey('1')">1</div>
+<div class="key" onclick="pressKey('2')">2</div>
+<div class="key" onclick="pressKey('3')">3</div>
+<div class="key" onclick="pressKey('4')">4</div>
+<div class="key" onclick="pressKey('5')">5</div>
+<div class="key" onclick="pressKey('6')">6</div>
+<div class="key" onclick="pressKey('7')">7</div>
+<div class="key" onclick="pressKey('8')">8</div>
+<div class="key" onclick="pressKey('9')">9</div>
+<div class="key" style="visibility:hidden"></div>
+<div class="key" onclick="pressKey('0')">0</div>
+<div class="key" onclick="clearKeys()">CLR</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="error-screen" class="screen hidden">
+    <div class="paper-card" style="max-width:450px;">
+        <h1 style="font-family:'Fredoka One';color:#4a90e2;font-size:2rem;margin-bottom:15px;">WRONG PASSCODE</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWg3NHJ6dnMwY3dwd2dqMGExcHhmOGJuN21mcmU0bWo4ZDJrNzhpZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Ie4CIIvQS0bk3zwZlM/giphy.gif" class="story-gif">
+        <div><button class="cute-btn" onclick="resetErrorScreen()">TRY AGAIN</button></div>
+    </div>
+</div>
+
+<div id="story-screen-1" class="screen hidden">
+    <div class="paper-card">
+        <img src="https://media.tenor.com/dTUzNZDjA2IAAAAj/milk-and-mocha.gif" class="story-gif">
+        <h2 class="story-title">I made something for you... 🎁</h2>
+        <button class="cute-btn" onclick="nextStory(1,2)">what?</button>
+    </div>
+</div>
+
+<div id="story-screen-2" class="screen hidden">
+    <div class="paper-card">
+        <img src="https://media.tenor.com/FPnkbdHpIxUAAAAj/mocha-sebusun.gif" class="story-gif">
+        <h2 class="story-title">Will you open the gift? 💖</h2>
+        <div style="display:flex;gap:20px;justify-content:center;">
+            <button class="cute-btn" onclick="nextStory(2,4)">yes</button>
+            <button class="cute-btn" onclick="nextStory(2,3)">no</button>
+        </div>
+    </div>
+</div>
+
+<div id="story-screen-3" class="screen hidden">
+    <div class="paper-card">
+        <img src="https://media.tenor.com/t7yxNky6vVoAAAAi/sebusun-mocha.gif" class="story-gif">
+        <h2 class="story-title" style="color:var(--blue-dark);">Why did you click no 😭 Please click yes 💔</h2>
+        <button class="cute-btn" onclick="nextStory(3,4)">fineee 💖</button>
+    </div>
+</div>
+
+<div id="story-screen-4" class="screen hidden">
+    <div class="paper-card">
+        <img src="https://media1.tenor.com/m/wbJiBIdOiRUAAAAd/byeon-wooseok-%EB%B3%80%EC%9A%B0%EC%84%9D.gif" class="story-gif">
+        <h2 class="story-title">Are you ready for your surprise? ✨</h2>
+        <button class="cute-btn" onclick="exitStoryToLibrary()">YESSS 🎉</button>
+    </div>
+</div>
+
+<div id="library-screen" class="screen hidden">
+<h1 class="title-text">23 Pieces of My Heart</h1>
+<div class="library-grid" id="dashboard-container"></div>
+</div>
+
+<div id="gift-view-screen" class="screen hidden">
+<button class="cute-btn" onclick="returnToLibrary()" style="position:absolute;top:20px;left:20px;z-index:90;">↩ Back to Heart Pieces</button>
+<div class="premium-gift-layout">
+<div class="memory-photo-container"><img id="main-memory-img" src=""></div>
+<div class="gift-text-container">
+<div>
+<div id="badge-index" style="font-weight: 600; color: var(--blue-dark);"></div>
+<p class="gift-main-msg" id="main-msg-body"></p>
+</div>
+<div class="navigation-controls">
+<button class="cute-btn" onclick="shiftSlide(-1)">Previous</button>
+<span id="numeric-tracker">1/23</span>
+<button class="cute-btn" id="forward-trigger" onclick="shiftSlide(1)">Next</button>
+</div>
+</div>
+</div>
+</div>
+
+<div id="balloon-screen" class="screen hidden">
+<h1 class="title-text">Pop My Balloons! 🎈</h1>
+<div class="balloon-field" id="balloon-field-container">
+<div class="ball" style="background:#74b9ff;" onclick="explodeBalloon(this,0)"></div>
+<div class="ball" style="background:#81ecec;" onclick="explodeBalloon(this,1)"></div>
+<div class="ball" style="background:#55efc4;" onclick="explodeBalloon(this,2)"></div>
+<div class="ball" style="background:#ffeaa7;" onclick="explodeBalloon(this,3)"></div>
+<div class="ball" style="background:#a29bfe;" onclick="explodeBalloon(this,4)"></div>
+<div class="ball" style="background:#fab1a0;" onclick="explodeBalloon(this,5)"></div>
+</div>
+
+<div id="center-popup" class="center-popup-overlay">
+<div class="center-msg-card">
+<div class="popup-text" id="center-popup-text"></div>
+<button class="cute-btn" id="popup-btn" onclick="closeCenterPopup()">Keep Popping! 🎈</button>
+</div>
+</div>
+</div>
+
+<div id="fireworks-screen" class="screen hidden">
+    <canvas id="fireworks-canvas"></canvas>
+    <div class="fw-overlay-text">Look at the stars... Look how they shine for you! ✨</div>
+</div>
+
+<script>
+const LAUNCH_DATE = new Date("May 22, 2026 00:00:00").getTime();
+const PASSCODE_VAULT = "2205";
+let keyedCombination = "";
+let poppedCount = 0;
+
+const primaryGiftsData = [];
+const heartfeltMessages = [
+"No matter how difficult life becomes, you never have to carry everything alone. I will always be here to calm your heart and remind you how precious you are. 🌻",
+"The way you chase freedom, adventure, and your dreams is honestly beautiful. Never let this world take away that fearless spark inside you. 🌊",
+"I hope life takes you to beautiful places, gives you unforgettable memories, and lets your adventurous soul stay wild forever. 🗺️",
+"Even on the days when you feel tired of everything, I hope you never forget how strong and beautiful your soul truly is. 🌸",
+"You are not behind in life. Your journey is unique, meaningful, and unfolding exactly the way it should. 🌈",
+"If your heart ever feels restless, come back to these words and let them remind you that someone truly cares for your happiness. 🤍",
+"You bring peace into the lives of people around you without even realizing it. Your presence itself is comforting. 🌷",
+"Your independence is inspiring. You stand on your own feet so confidently, and that’s one of the most admirable things about you. ✨",
+"If I could give you one thing in life, I would give you the ability to see yourself through my eyes... Because then you would realize how truly special you are. 💖",
+"On the days you doubt yourself, remember how far you’ve already come. You survived moments you once thought would break you. 🌟",
+"Your smile has a way of making everything around you feel lighter and more beautiful. Never stop smiling. ☀️",
+"You are someone’s favorite thought, favorite feeling, and favorite blessing in life. 🌻",
+"I hope you always choose yourself, protect your peace, and never lose your gentle heart in this harsh world. 🌊",
+"No matter how many storms come into your life, I know you will rise every single time stronger than before. 🕊️",
+"You don’t have to be perfect to be deeply loved. Just being you is already more than enough. 💫",
+"I hope your future is full of adventures, laughter, success, peace, and moments that make your soul feel alive. ✨",
+"You deserve a life where your soul feels calm, your mind feels free, and your heart feels safe every day. 🌺",
+"The world becomes softer and kinder because someone like you exists in it. 🌷",
+"Please take care of yourself gently. Rest when needed. Heal slowly. Grow beautifully. 🌙",
+"You inspire people more than you realize. Your strength quietly gives hope to others around you. ✨",
+"If life ever feels overwhelming, remember this — you already carry enough light inside you to survive the darkness. 🕯️",
+"I truly hope your 23rd year becomes the beginning of your happiest memories, biggest dreams, and most peaceful days. 🎂",
+"No matter where life takes us, I will always wish for your happiness, your peace, and your beautiful smile forever. ❤️"
+];
+
+for(let i=1;i<=23;i++){
+    let currentBg = i % 4 === 1 ? "bg-beach" : i % 4 === 2 ? "bg-fishes" : i % 4 === 3 ? "bg-adventurous" : "bg-sunflower";
+    primaryGiftsData.push({
+        label:`Piece of My Heart #${i}`,
+        text:heartfeltMessages[i-1],
+        theme:currentBg,
+        image:`photo${i}.jpg`
+    });
+}
+
+const balloonWhispers = [
+    "You are truly special 💖",
+    "Keep smiling always ✨",
+    "May all your dreams come true 🌸",
+    "You deserve endless happiness 🌈",
+    "Thank you for existing 🌻",
+    "Happy 23rd Birthday Thangapulla ❤️"
+];
+
+let currentGiftIndex = 0;
+let clockTimer = setInterval(calculateTimeRemaining,1000);
+
+function calculateTimeRemaining(){
+    const timeDifference = LAUNCH_DATE - new Date().getTime();
+    if(timeDifference <= 0){
+        clearInterval(clockTimer);
+        transitionToKeypad();
+        return;
+    }
+    document.getElementById("d").innerText = String(Math.floor(timeDifference / (1000*60*60*24))).padStart(2,'0');
+    document.getElementById("h").innerText = String(Math.floor((timeDifference % (1000*60*60*24)) / (1000*60*60))).padStart(2,'0');
+    document.getElementById("m").innerText = String(Math.floor((timeDifference % (1000*60*60)) / (1000*60))).padStart(2,'0');
+    document.getElementById("s").innerText = String(Math.floor((timeDifference % (1000*60)) / 1000)).padStart(2,'0');
+}
+
+function triggerSkip9(){
+     document.getElementById("countdown-screen").classList.add("hidden");
+     document.getElementById("skip-screen").classList.remove("hidden");
+     let remainingTicks = 9;
+     let subcounter = setInterval(()=>{
+         remainingTicks--;
+         document.getElementById("skip-number").innerText = remainingTicks;
+         if(remainingTicks===0){
+             clearInterval(subcounter);
+             document.getElementById("skip-screen").classList.add("hidden");
+             transitionToKeypad();
+         }
+     },1000);
+}
+
+function transitionToKeypad(){
+    document.getElementById("keypad-screen").classList.remove("hidden");
+    document.getElementById("bg-music").play();
+}
+
+function pressKey(num){
+    if(keyedCombination.length >= 4) return;
+    keyedCombination += num;
+    renderDots();
+    if(keyedCombination.length===4){
+        setTimeout(()=>{
+            if(keyedCombination===PASSCODE_VAULT){
+                document.getElementById("keypad-screen").classList.add("hidden");
+                document.getElementById("story-screen-1").classList.remove("hidden");
+            }else{
+                document.getElementById("keypad-screen").classList.add("hidden");
+                document.getElementById("error-screen").classList.remove("hidden");
+                clearKeys();
+            }
+        },300);
+    }
+}
+
+function clearKeys(){
+    keyedCombination="";
+    renderDots();
+}
+
+function resetErrorScreen(){
+    document.getElementById("error-screen").classList.add("hidden");
+    document.getElementById("keypad-screen").classList.remove("hidden");
+    clearKeys();
+}
+
+function renderDots(){
+    for(let i=0;i<4;i++){
+        let dotEl=document.getElementById("dot"+i);
+        if(i < keyedCombination.length) dotEl.classList.add("active");
+        else dotEl.classList.remove("active");
+    }
+}
+
+function nextStory(hideID,showID){
+    document.getElementById("story-screen-"+hideID).classList.add("hidden");
+    document.getElementById("story-screen-"+showID).classList.remove("hidden");
+}
+
+function exitStoryToLibrary(){
+    document.getElementById("story-screen-4").classList.add("hidden");
+    document.getElementById("library-screen").classList.remove("hidden");
+    generateLibraryDashboard();
+}
+
+function generateLibraryDashboard(){
+    const container=document.getElementById("dashboard-container");
+    container.innerHTML="";
+    primaryGiftsData.forEach((gift,idx)=>{
+        let card=document.createElement("div");
+        card.className="envelope-item";
+        card.onclick=()=>launchSpecificGift(idx);
+        card.innerHTML=`<span class="env-icon">💙</span><span class="env-label">${gift.label}</span>`;
+        container.appendChild(card);
+    });
+}
+
+function launchSpecificGift(idx){
+    document.getElementById("library-screen").classList.add("hidden");
+    document.getElementById("gift-view-screen").classList.remove("hidden");
+    renderGiftSlide(idx);
+}
+
+function renderGiftSlide(idx){
+    currentGiftIndex=idx;
+    const item=primaryGiftsData[idx];
+    document.getElementById("gift-view-screen").className="screen "+item.theme;
+    document.getElementById("badge-index").innerText=`${item.label} (${idx+1}/23)`;
+    document.getElementById("main-msg-body").innerText=item.text;
+    document.getElementById("main-memory-img").src=item.image;
+    document.getElementById("numeric-tracker").innerText=`${idx+1}/23`;
+    document.getElementById("forward-trigger").innerText= idx===primaryGiftsData.length-1 ? "Balloons Room 🎈" : "Next";
+}
+
+function shiftSlide(direction){
+    let targetIdx=currentGiftIndex+direction;
+    if(targetIdx>=0 && targetIdx<primaryGiftsData.length){
+        renderGiftSlide(targetIdx);
+    }
+    else if(targetIdx>=primaryGiftsData.length){
+        document.getElementById("gift-view-screen").classList.add("hidden");
+        document.getElementById("balloon-screen").classList.remove("hidden");
+    }
+}
+
+function returnToLibrary(){
+    document.getElementById("gift-view-screen").classList.add("hidden");
+    document.getElementById("library-screen").classList.remove("hidden");
+}
+
+function explodeBalloon(element,index){
+    if(element.classList.contains("popped")) return;
+    element.classList.add("popped");
+    poppedCount++;
+
+    let pop = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3");
+    pop.volume = 0.5;
+    pop.play();
+
+    for(let i=0;i<40;i++){
+        let confetti=document.createElement("div");
+        confetti.style.position="fixed";
+        confetti.style.width="12px";
+        confetti.style.height="12px";
+        confetti.style.borderRadius="50%";
+        confetti.style.background=`hsl(${Math.random()*360},100%,70%)`;
+        let rect=element.getBoundingClientRect();
+        confetti.style.left=rect.left+40+"px";
+        confetti.style.top=rect.top+40+"px";
+        confetti.style.zIndex="9999";
+        document.body.appendChild(confetti);
+
+        let x=(Math.random()-0.5)*500;
+        let y=(Math.random()-0.5)*500;
+
+        confetti.animate([
+            { transform:"translate(0,0) scale(1)", opacity:1 },
+            { transform:`translate(${x}px,${y}px) scale(0)`, opacity:0 }
+        ],{ duration:1400, easing:"cubic-bezier(0.175,0.885,0.32,1.275)" });
+
+        setTimeout(()=>{ confetti.remove(); },1400);
+    }
+
+    setTimeout(()=>{
+        const popupText = document.getElementById("center-popup-text");
+        const popupBtn = document.getElementById("popup-btn");
+        
+        if(poppedCount === 6) {
+            popupText.innerHTML = `<strong>${balloonWhispers[index]}</strong><br><br>💝 <em>Closing Message:</em><br>Hey Amaya,<br><br>I really wish we always stay comfortable in each other’s presence, no matter how life changes around us. You’re someone I genuinely admire.<br><br>I truly hope you achieve every dream you carry in your heart and experience all the beautiful things life has waiting for you.💙<br><br>And also… I’m sorry for the moments where my insecurities and inferiority complex affected the way I acted or expressed myself. It was never because of you. Sometimes I just struggled with my own thoughts more than I knew how to explain.<br><br>No matter what happens, I’ll always there for you and wish the best for you and your happiness. ✨<br>Happy Birthday!`;
+            popupBtn.innerText = "Cherish This Forever ✨";
+        } else {
+            popupText.innerText = balloonWhispers[index];
+            popupBtn.innerText = "Keep Popping! 🎈";
+        }
+        document.getElementById("center-popup").classList.add("reveal");
+    },300);
+}
+
+function closeCenterPopup(){
+    document.getElementById("center-popup").classList.remove("reveal");
+    if(poppedCount === 6) {
+        document.getElementById("balloon-screen").classList.add("hidden");
+        document.getElementById("fireworks-screen").classList.remove("hidden");
+        startFireworksEngine();
+    }
+}
+
+/* --- OPTIMIZED SLOW-MOTION FIREWORKS ENGINE --- */
+function startFireworksEngine() {
+    const canvas = document.getElementById('fireworks-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let fireworks = [];
+    let particles = [];
+
+    const fontMatrix = {
+        'H': [[0,0],[0,1],[0,2],[0,3],[0,4],[1,2],[2,2],[3,0],[3,1],[3,2],[3,3],[3,4]],
+        'A': [[0,2],[0,3],[0,4],[1,1],[1,3],[2,1],[2,3],[3,2],[3,3],[3,4]],
+        'P': [[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[2,0],[2,2],[3,1]],
+        'B': [[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[1,4],[2,0],[2,2],[2,4],[3,1],[3,3]],
+        'I': [[0,0],[1,0],[2,0],[1,1],[1,2],[1,3],[1,4],[0,4],[2,4]],
+        'R': [[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,2],[2,0],[2,3],[3,1],[3,4]],
+        'T': [[0,0],[1,0],[2,0],[3,0],[4,0],[2,1],[2,2],[2,3],[2,4]],
+        'D': [[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,4],[2,0],[2,4],[3,1],[3,2],[3,3]],
+        'Y': [[0,0],[4,0],[1,1],[3,1],[2,2],[2,3],[2,4]]
+    };
+
+    function createTextExplosion(text, targetX, targetY, baseHue) {
+        let currentX = targetX - (text.length * 28);
+        for (let l = 0; l < text.length; l++) {
+            const char = text[l];
+            const matrix = fontMatrix[char];
+            if (matrix) {
+                matrix.forEach(pt => {
+                    const pX = currentX + pt[0] * 8;
+                    const pY = targetY + pt[1] * 8;
+                    particles.push({
+                        x: targetX, y: targetY,
+                        tx: pX, ty: pY,
+                        vx: (pX - targetX) * 0.015 + (Math.random() - 0.5) * 0.2,
+                        vy: (pY - targetY) * 0.015 + (Math.random() - 0.5) * 0.2,
+                        alpha: 1,
+                        hue: baseHue,
+                        isText: true
+                    });
+                });
+            }
+            currentX += 50;
+        }
+    }
+
+    class FireworkRocket {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height;
+            this.tx = Math.random() * canvas.width;
+            this.ty = canvas.height * 0.15 + Math.random() * (canvas.height * 0.25);
+            this.hue = Math.random() * 360;
+            const angle = Math.atan2(this.ty - this.y, this.tx - this.x);
+            this.speed = 5 + Math.random() * 3;
+            this.vx = Math.cos(angle) * this.speed;
+            this.vy = Math.sin(angle) * this.speed;
+            this.trail = [];
+        }
+        update() {
+            this.trail.push({x: this.x, y: this.y});
+            if(this.trail.length > 12) this.trail.shift();
+            this.x += this.vx;
+            this.y += this.vy;
+            return this.vy >= 0 || this.y <= this.ty;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.strokeStyle = `hsl(${this.hue}, 100%, 70%)`;
+            ctx.lineWidth = 2;
+            for(let i=1; i<this.trail.length; i++) {
+                ctx.moveTo(this.trail[i-1].x, this.trail[i-1].y);
+                ctx.lineTo(this.trail[i].x, this.trail[i].y);
+            }
+            ctx.stroke();
+        }
+        explode() {
+            let roll = Math.random();
+            if (roll < 0.45) {
+                createTextExplosion("HAPPY", this.x, this.y - 40, this.hue);
+                createTextExplosion("BIRTHDAY", this.x, this.y + 40, (this.hue + 35) % 360);
+            } else {
+                for (let i = 0; i < 75; i++) {
+                    const ang = Math.random() * Math.PI * 2;
+                    const pSpeed = Math.random() * 2 + 0.5;
+                    particles.push({
+                        x: this.x, y: this.y,
+                        vx: Math.cos(ang) * pSpeed,
+                        vy: Math.sin(ang) * pSpeed,
+                        alpha: 1,
+                        hue: (this.hue + (Math.random() * 40)) % 360,
+                        isText: false
+                    });
+                }
+            }
+        }
+    }
+
+    function loop() {
+        ctx.fillStyle = 'rgba(2, 2, 8, 0.15)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (Math.random() < 0.02) fireworks.push(new FireworkRocket());
+
+        for (let i = fireworks.length - 1; i >= 0; i--) {
+            if (fireworks[i].update()) {
+                fireworks[i].explode();
+                fireworks.splice(i, 1);
+            } else {
+                fireworks[i].draw();
+            }
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            let p = particles[i];
+            if (p.isText) {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vx *= 0.98;
+                p.vy *= 0.98;
+                p.alpha -= 0.006;
+            } else {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.015;
+                p.alpha -= 0.009;
+            }
+
+            if (p.alpha <= 0) {
+                particles.splice(i, 1);
+            } else {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.isText ? 3 : 1.8, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${hslToRgb(p.hue / 360, 1, 0.7)}, ${p.alpha})`;
+                ctx.shadowBlur = p.isText ? 8 : 1;
+                ctx.shadowColor = `hsl(${p.hue}, 100%, 60%)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+        requestAnimationFrame(loop);
+    }
+
+    function hslToRgb(h, s, l){
+        let r, g, b;
+        if(s == 0) r = g = b = l;
+        else {
+            const hue2rgb = (p, q, t) => {
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+            let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            let p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+        return `${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)}`;
+    }
+
+    loop();
+}
+</script>
+</body>
+</html>
