@@ -399,7 +399,6 @@ body,html{
     visibility:visible;
 }
 
-/* MODIFIED POPUP TO ELIMINATE TEXT OVERWRITING AND ENABLE INTERNAL SCROLLING */
 .center-msg-card{
     background:#fff;
     padding:30px;
@@ -413,7 +412,6 @@ body,html{
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* ADDED FIXED SCROLLING ZONE INSIDE THE ELEMENT BODY */
 .popup-text{
     font-size:1.1rem;
     line-height:1.6;
@@ -424,7 +422,6 @@ body,html{
     flex: 1; 
 }
 
-/* Soft custom scrollbar formatting for cleaner looks */
 .popup-text::-webkit-scrollbar {
     width: 6px;
 }
@@ -484,7 +481,7 @@ body,html{
 
 <body>
 
-<audio id="bg-music" autoplay loop>
+<audio id="bg-music" loop>
 <source src="yellow.mp3" type="audio/mpeg">
 </audio>
 
@@ -655,7 +652,7 @@ const heartfeltMessages = [
 "I hope your future is full of adventures, laughter, success, peace, and moments that make your soul feel alive. ✨",
 "You deserve a life where your soul feels calm, your mind feels free, and your heart feels safe every day. 🌺",
 "The world becomes softer and kinder because someone like you exists in it. 🌷",
-"Please take care of yourself gently. Rest when needed. Heal slowly. Grow beautifully. 🌙",
+"Please take care of yourself gently. Rest when needed. Heal slowly. Growth beautifully. 🌙",
 "You inspire people more than you realize. Your strength quietly gives hope to others around you. ✨",
 "If life ever feels overwhelming, remember this — you already carry enough light inside you to survive the darkness. 🕯️",
 "I truly hope your 23rd year becomes the beginning of your happiest memories, biggest dreams, and most peaceful days. 🎂",
@@ -684,11 +681,19 @@ const balloonWhispers = [
 let currentGiftIndex = 0;
 let clockTimer = setInterval(calculateTimeRemaining,1000);
 
+// Unlocking background music early on user click anywhere to bypass browser block rules
+document.addEventListener('click', function() {
+    const audio = document.getElementById("bg-music");
+    if (audio && audio.paused && !document.getElementById("keypad-screen").classList.contains("hidden")) {
+        audio.play().catch(e => console.log("Audio waiting for right context."));
+    }
+}, { once: false });
+
 function calculateTimeRemaining(){
     const timeDifference = LAUNCH_DATE - new Date().getTime();
     if(timeDifference <= 0){
         clearInterval(clockTimer);
-        transitionToKeypad();
+        triggerSkip9();
         return;
     }
     document.getElementById("d").innerText = String(Math.floor(timeDifference / (1000*60*60*24))).padStart(2,'0');
@@ -698,6 +703,14 @@ function calculateTimeRemaining(){
 }
 
 function triggerSkip9(){
+     clearInterval(clockTimer);
+     
+     // Instantly try playing the audio using the click gesture permission right here
+     const audio = document.getElementById("bg-music");
+     if(audio) {
+         audio.play().catch(err => console.log("Playback engine waiting for final transition layer"));
+     }
+     
      document.getElementById("countdown-screen").classList.add("hidden");
      document.getElementById("skip-screen").classList.remove("hidden");
      let remainingTicks = 9;
@@ -713,8 +726,12 @@ function triggerSkip9(){
 }
 
 function transitionToKeypad(){
+    document.getElementById("countdown-screen").classList.add("hidden");
     document.getElementById("keypad-screen").classList.remove("hidden");
-    document.getElementById("bg-music").play();
+    const audio = document.getElementById("bg-music");
+    if(audio) {
+         audio.play().catch(e => console.log("Playback restriction handled. Try clicking the screen."));
+    }
 }
 
 function pressKey(num){
@@ -867,7 +884,6 @@ function closeCenterPopup(){
     }
 }
 
-/* --- OPTIMIZED SLOW-MOTION FIREWORKS ENGINE --- */
 function startFireworksEngine() {
     const canvas = document.getElementById('fireworks-canvas');
     const ctx = canvas.getContext('2d');
